@@ -1,0 +1,8 @@
+application/.venv/
+application/instance/
+application/__pycache__/
+application/**/*.pyc
+application/.env
+application/*.db
+.git/
+.gitignore
