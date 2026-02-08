@@ -30,6 +30,7 @@
             display: flex;
             flex-direction: column;
         }
+
         /* Header Styles */
         .header {
             background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
@@ -69,10 +70,12 @@
         .header__nav-link:hover {
             color: white;
         }
+
         /* Main Content */
         .main {
             flex: 1;
         }
+
         /* Footer Styles */
         .footer {
             background-color: var(--color-bg-alt);
@@ -89,6 +92,7 @@
             color: var(--color-text-light);
             font-size: 0.875rem;
         }
+
         /* Button Styles */
         .btn {
             display: inline-block;
@@ -110,6 +114,7 @@
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
         }
+
         /* Modal Styles */
         .modal-overlay {
             display: none;
@@ -170,6 +175,46 @@
         .modal__body {
             color: var(--color-text-light);
         }
+
+        /* Flash Messages Styles */
+        .flash-messages {
+            max-width: 1200px;
+            margin: 1rem auto;
+            padding: 0 2rem;
+        }
+        .flash {
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.875rem;
+        }
+        .flash--success {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+        }
+        .flash--error {
+            background-color: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #dc2626;
+        }
+        .flash--info {
+            background-color: #eff6ff;
+            border: 1px solid #bfdbfe;
+            color: #1e40af;
+        }
+        .flash__close {
+            background: none;
+            border: none;
+            font-size: 1.25rem;
+            cursor: pointer;
+            color: inherit;
+            padding: 0 0.25rem;
+        }
+
         {% block extra_css %}{% endblock %}
     </style>
 </head>
@@ -183,13 +228,34 @@
             <nav class="header__nav">
                 <a href="{{ url_for('public.index') }}" class="header__nav-link">Home</a>
                 <a href="{{ url_for('public.subscribe') }}" class="header__nav-link">Subscribe</a>
-                <a href="{{ url_for('admin.subscribers') }}" class="header__nav-link">Admin</a>
+                
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('admin.subscribers') }}" class="header__nav-link">Admin</a>
+                    <a href="{{ url_for('auth.logout') }}" class="header__nav-link">Logout</a>
+                {% else %}
+                    <a href="{{ url_for('auth.login') }}" class="header__nav-link">Login</a>
+                {% endif %}
             </nav>
         </div>
     </header>
+
     <main class="main">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+            <div class="flash flash--{{ category }}">
+                {{ message }}
+                <button class="flash__close" onclick="this.parentElement.remove()">&times;</button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
         {% block content %}{% endblock %}
     </main>
+
     <footer class="footer">
         <div class="footer__container">
             <p class="footer__text">

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Login - News Flash{% endblock %}
+
+{% block content %}
+<div class="login">
+    <h1 class="login__title">Admin Login</h1>
+    <form class="form" action="{{ url_for('auth.login') }}" method="POST">
+        {{ form.hidden_tag() }}
+        <div class="form__group">
+            {{ form.username.label(class="form__label") }}
+            {{ form.username(class="form__input", placeholder="Username", autofocus=true) }}
+            {% if form.username.errors %}
+            <ul class="form__errors">
+                {% for error in form.username.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        <div class="form__group">
+            {{ form.password.label(class="form__label") }}
+            {{ form.password(class="form__input", placeholder="Password") }}
+            {% if form.password.errors %}
+            <ul class="form__errors">
+                {% for error in form.password.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        {{ form.submit(class="form__button") }}
+    </form>
+</div>
+{% endblock %}

@@ -1,11 +1,15 @@
 """User model for admin authentication."""
+from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import db
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     """Admin user with secure password storage.
+    
     Passwords are hashed using Werkzeug's PBKDF2 implementation.
     Never stores plain text passwords.
+    UserMixin provides Flask-Login integration:
+    is_authenticated, is_active, is_anonymous, get_id()
     """
     __tablename__ = "users"
 
