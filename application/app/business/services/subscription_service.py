@@ -55,3 +55,12 @@ class SubscriptionService:
         self.repository.create(email=normalized_email, name=normalized_name)
 
         return True, ""
+
+    def get_all_subscribers(self):
+        """
+        Get all subscribers.
+        Delegates to the repository for data access.
+        Returns:
+            List of all Subscriber instances, newest first
+        """
+        return self.repository.get_all()

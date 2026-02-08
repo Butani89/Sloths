@@ -176,13 +176,14 @@
 <body>
     <header class="header">
         <div class="header__container">
-            <a href="/" class="header__logo">
+            <a href="{{ url_for('public.index') }}" class="header__logo">
                 <span class="header__logo-icon">&#9889;</span>
                 News Flash
             </a>
             <nav class="header__nav">
-                <a href="/" class="header__nav-link">Home</a>
-                <a href="#" class="header__nav-link">About</a>
+                <a href="{{ url_for('public.index') }}" class="header__nav-link">Home</a>
+                <a href="{{ url_for('public.subscribe') }}" class="header__nav-link">Subscribe</a>
+                <a href="{{ url_for('admin.subscribers') }}" class="header__nav-link">Admin</a>
             </nav>
         </div>
     </header>

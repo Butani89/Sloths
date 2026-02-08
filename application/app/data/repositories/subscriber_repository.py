@@ -24,3 +24,11 @@ class SubscriberRepository:
         db.session.add(subscriber)
         db.session.commit()
         return subscriber
+
+    def get_all(self):
+        """
+        Get all subscribers ordered by subscription date (newest first).
+        Returns:
+            List of all Subscriber instances
+        """
+        return Subscriber.query.order_by(Subscriber.subscribed_at.desc()).all()

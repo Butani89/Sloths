@@ -39,4 +39,7 @@ def create_app(config_name: str | None = None) -> Flask:
     from .presentation.routes.public import bp as public_bp
     app.register_blueprint(public_bp)
 
+    from .presentation.routes.admin import admin_bp
+    app.register_blueprint(admin_bp)
+
     return app
