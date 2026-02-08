@@ -22,5 +22,4 @@ COPY application/ .
 EXPOSE 5000
 
 # Run migrations at startup, then start gunicorn
-CMD ["bash", "entrypoint.sh"]# Trigger build
-echo "# Restart trigger" >> Dockerfile
+CMD ["bash", "entrypoint.sh"]
