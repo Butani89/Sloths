@@ -34,6 +34,7 @@ def create_app(config_name: str | None = None) -> Flask:
 
     # Import models (after db.init_app to avoid circular imports)
     from .data import models  # noqa: F401
+    from app.data.models.user import User  # noqa: F401
 
     # Register blueprints
     from .presentation.routes.public import bp as public_bp
