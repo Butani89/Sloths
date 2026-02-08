@@ -8,6 +8,9 @@
     <p class="admin__count">{{ count }} subscriber{{ "s" if count != 1 else "" }} total</p>
 
     {% if subscribers %}
+    <div class="admin__actions">
+        <a href="{{ url_for('admin.export_csv') }}" class="admin__export-btn">Export CSV</a>
+    </div>
     <table class="admin__table">
         <thead>
             <tr>
@@ -46,6 +49,26 @@
         color: #6b7280;
         margin-bottom: 1.5rem;
     }
+    /* Styles for the Export button */
+    .admin__actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 1rem;
+    }
+    .admin__export-btn {
+        background-color: #10b981; /* Green color */
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.875rem;
+        transition: background-color 0.2s;
+    }
+    .admin__export-btn:hover {
+        background-color: #059669;
+    }
+    
     .admin__table {
         width: 100%;
         border-collapse: collapse;
